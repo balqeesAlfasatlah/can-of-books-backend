@@ -18,5 +18,5 @@ reFormSchema.userSchema = new mongoose.Schema({
 reFormSchema.bookModel = mongoose.model("book" ,reFormSchema.bookSchema);
 reFormSchema.userModel = mongoose.model("user" ,reFormSchema.userSchema);
 
-module.exports = reFormSchema.userModel;
+module.exports = reFormSchema;
 

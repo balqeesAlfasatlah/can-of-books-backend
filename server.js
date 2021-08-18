@@ -20,8 +20,8 @@ mongoose.connect("mongodb://localhost:27017/books" ,{
 });
 
 function bookCollection(){
-  const balqees = new reFormSchema({
-    email : "balqeesAlfasatlah@yahoo.com",
+  const balqees = new reFormSchema.userModel({
+    email : "balqeesalfasatlah1@gmail.com",
     books : [
       {
         name : "An Infinte Faith" ,
@@ -44,23 +44,26 @@ function bookCollection(){
     ] ,
   });
   balqees.save();
-  console.log(balqees);
+  return balqees;
+  
 }
 
 
 //bookCollection();
-app.get("/books", getFavouriteBooks);
-function getFavouriteBooks (req, res){
+app.get("/books",(req, res)=>{
   let {email}= req.query;
-
-  reFormSchema.myUserModel.find({email : email} ,(error ,userData)=>{
+ console.log(email)
+  reFormSchema.userModel.findOne({email : email} ,(error ,userData)=>{
     if(error){
       res.send('didnt working');
     }else{
-      res.send(userData[0].books);
+      console.log(userData);
+      res.send(userData);
+      
     }
   })
-}
+} );
+
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
