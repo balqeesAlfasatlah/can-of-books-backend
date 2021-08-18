@@ -11,7 +11,8 @@ app.use(cors());
 const {req,res}= require('express');
 const reFormSchema = require('./schemas');
 
-const PORT = process.env.PORT || 3001;
+
+const PORT = process.env.PORT || 3005;
 
 mongoose.connect("mongodb://localhost:27017/books" ,{
   useNewUrlParser : true ,
@@ -19,7 +20,7 @@ mongoose.connect("mongodb://localhost:27017/books" ,{
 });
 
 function bookCollection(){
-  const balqees = new reFormSchema.myUserModel({
+  const balqees = new reFormSchema({
     email : "balqeesAlfasatlah@yahoo.com",
     books : [
       {
@@ -43,20 +44,12 @@ function bookCollection(){
     ] ,
   });
   balqees.save();
+  console.log(balqees);
 }
 
-app.get('/test', (request, response) => {
 
-  // TODO: 
-  // STEP 1: get the jwt from the headers
-  // STEP 2. use the jsonwebtoken library to verify that it is a valid jwt
-  // jsonwebtoken dock - https://www.npmjs.com/package/jsonwebtoken
-  // STEP 3: to prove that everything is working correctly, send the opened jwt back to the front-end
-
-})
-
-
-server.get("/books", getFavouriteBooks);
+//bookCollection();
+app.get("/books", getFavouriteBooks);
 function getFavouriteBooks (req, res){
   let {email}= req.query;
 
